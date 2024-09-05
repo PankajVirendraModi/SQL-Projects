@@ -341,9 +341,8 @@ you must initialize a constants at its declaration
 
 A homogeneous single dimension data structure which is made up of elements of same datatype is called collection in Oracle Database. In simple language we can say that, an array in Oracle Database is called Collection.
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/15135199/97087455-93f06000-1654-11eb-97ed-0bfb2b2367d7.png" width="650">
-</p>
+![image](https://github.com/user-attachments/assets/9da5a1ee-398e-4fe8-b131-25a768696def)
+
 
 - <b>Nested Tables</b> : List
 - <b>Variable Sized Arrays or VARRAYs</b> : Array
