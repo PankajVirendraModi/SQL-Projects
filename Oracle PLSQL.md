@@ -1362,10 +1362,10 @@ FORALL is not FOR LOOP
 
 ## CURSOR
 
-<p align="center">
+
   ![image](https://github.com/user-attachments/assets/9e7aeaa0-1306-461a-b571-fc45c4ac4d67)
 
-</p>
+
 
 A Cursor is a pointer to this context area
 
