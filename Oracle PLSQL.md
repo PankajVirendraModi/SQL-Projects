@@ -362,12 +362,7 @@ A homogeneous single dimension data structure which is made up of elements of sa
 - <b>TRIM</b> :
 - <b>XXX</b> :
 - <b>XXX</b> :
-- <b>XXX</b> :
-- <b>XXX</b> :
-- <b>XXX</b> :
-- <b>XXX</b> :
-- <b>XXX</b> :
-- <b>XXX</b> :
+
 
 #### Nested Tables
 
