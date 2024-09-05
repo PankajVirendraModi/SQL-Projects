@@ -1363,7 +1363,8 @@ FORALL is not FOR LOOP
 ## CURSOR
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/15135199/96413139-6733e700-1215-11eb-821d-00313cb60c8e.png" width="650">
+  ![image](https://github.com/user-attachments/assets/9e7aeaa0-1306-461a-b571-fc45c4ac4d67)
+
 </p>
 
 A Cursor is a pointer to this context area
