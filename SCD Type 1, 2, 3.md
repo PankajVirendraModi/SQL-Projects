@@ -1,8 +1,6 @@
-## ORACLE SQL DEVELOPER
-
 # Slowly Changing Dimensions (SCD) Implementation
 
-This project contains the implementation of Slowly Changing Dimensions (SCD) of types 1, 2, and 3 in SQL. These types are used in data warehousing to manage and store historical data over time.
+This project contains the implementation of Slowly Changing Dimensions (SCD) of types 1, 2, and 3 in SQL. These types are used in data warehousing to manage and store historical data over time. I used *ORACLE SQL DEVELOPER*
 
 ## Overview of SCD Types
 
