@@ -1,3 +1,4 @@
+```sql
 -- A. roll metrics
 -- 1. How many rolls were ordered?
 select count(roll_id) total_rolls_ordered from customer_orders;
