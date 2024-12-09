@@ -1,5 +1,3 @@
-```sql
-
 ### Table: `driver`
 
 | Column Name | Data Type | Description                        |
@@ -102,8 +100,37 @@ VALUES
     (8, 2, '01-10-2021 00:15:02', '23.4 km', '15 minute', null),
     (9, 2, null, null, null, 'Customer Cancellation'),
     (10, 1, '01-11-2021 18:50:20', '10km', '10minutes', null);
+```
+### Table: `customer_orders`
 
-select * from customer_orders;
+| Column Name          | Data Type      | Description                                    |
+|----------------------|----------------|------------------------------------------------|
+| `order_id`           | `integer`      | Unique identifier for the customer order      |
+| `customer_id`        | `integer`      | Unique identifier for the customer            |
+| `roll_id`            | `integer`      | Unique identifier for the roll ordered        |
+| `not_include_items`  | `varchar(4)`    | Comma-separated list of items not included    |
+| `extra_items_included`| `varchar(4)`   | Comma-separated list of extra items included  |
+| `order_date`         | `datetime`     | Date and time when the order was placed       |
+
+### Insert Data:
+
+```sql
+INSERT INTO customer_orders(order_id, customer_id, roll_id, not_include_items, extra_items_included, order_date)
+VALUES 
+    (1, 101, 1, '', '', '01-01-2021 18:05:02'),
+    (2, 101, 1, '', '', '01-01-2021 19:00:52'),
+    (3, 102, 1, '', '', '01-02-2021 23:51:23'),
+    (3, 102, 2, '', 'NaN', '01-02-2021 23:51:23'),
+    (4, 103, 1, '4', '', '01-04-2021 13:23:46'),
+    (4, 103, 1, '4', '', '01-04-2021 13:23:46'),
+    (4, 103, 2, '4', '', '01-04-2021 13:23:46'),
+    (5, 104, 1, null, '1', '01-08-2021 21:00:29'),
+    (6, 101, 2, null, null, '01-08-2021 21:03:13'),
+    (7, 105, 2, null, '1', '01-08-2021 21:20:29'),
+    (8, 102, 1, null, null, '01-09-2021 23:54:33'),
+    (9, 103, 1, '4', '1,5', '01-10-2021 11:22:59'),
+    (10, 104, 1, null, null, '01-11-2021 18:34:49'),
+    (10, 104, 1, '2,6', '1,4', '01-11-2021 18:34:49');
 
 -- A. roll metrics
 -- 1. How many rolls were ordered?
