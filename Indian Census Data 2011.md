@@ -1,4 +1,4 @@
-USE PRACT;
+# Indian Census Data
 
 #### Example CSV File
 You can download or view the CSV file from [this link](https://github.com/PankajVirendraModi/SQL-Projects/blob/main/DISTRICTSTATISTICS.csv).
