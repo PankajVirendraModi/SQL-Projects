@@ -58,7 +58,7 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Successfully implemented SCD 1');
 END;
 ```
--- Execute the procedure
+Execute the procedure
 EXEC SCD_ONE;
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- SCD Type-2
