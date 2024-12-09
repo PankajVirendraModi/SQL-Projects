@@ -185,7 +185,9 @@ group by customer_id;
 
 select (max(cleaned_duration)-min(cleaned_duration)) as [difference] from(
 select order_id, driver_id, duration,
-cast(case when duration like '%min%' then trim(left(duration, charindex('m', duration)-1)) else duration end as integer) as cleaned_duration
+	cast(case when duration like '%min%'
+		then trim(left(duration, charindex('m', duration)-1))
+		else duration end as integer) as cleaned_duration
 from driver_order where duration is not null) a;
 ```
 
@@ -194,7 +196,9 @@ from driver_order where duration is not null) a;
 -- speed = distance/time
 select a.order_id, a.driver_id, (a.distance/a.cleaned_duration) speed, b.cnt from(
 select order_id, driver_id, cast(trim(replace(lower(distance),'km','')) as decimal(10,2)) distance,
-	cast(case when duration like '%min%' then trim(left(duration, charindex('m', duration)-1)) else duration end as integer) as cleaned_duration
+	cast(case when duration like '%min%'
+		then trim(left(duration, charindex('m', duration)-1))
+		else duration end as integer) as cleaned_duration
 from driver_order where duration is not null) a inner join
 (select order_id, count(roll_id) cnt from customer_orders group by order_id) b on a.order_id=b.order_id;
 ```
