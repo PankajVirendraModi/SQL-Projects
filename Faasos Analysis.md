@@ -1,10 +1,109 @@
 ```sql
+
+### Table: `driver`
+
+| Column Name | Data Type | Description                        |
+|-------------|-----------|------------------------------------|
+| `driver_id` | `integer` | Unique identifier for the driver  |
+| `reg_date`  | `date`    | Registration date of the driver   |
+
+### Insert Data:
+
+```sql
+INSERT INTO driver(driver_id, reg_date) 
+VALUES 
+    (1, '01-01-2021'),
+    (2, '01-03-2021'),
+    (3, '01-08-2021'),
+    (4, '01-15-2021');
+```
+
+### Table: `ingredients`
+
+| Column Name     | Data Type  | Description                          |
+|-----------------|------------|--------------------------------------|
+| `ingredients_id`| `integer`  | Unique identifier for the ingredient |
+| `ingredients_name` | `varchar(60)` | Name of the ingredient         |
+
+### Insert Data:
+
+```sql
+INSERT INTO ingredients(ingredients_id, ingredients_name) 
+VALUES 
+    (1, 'BBQ Chicken'),
+    (2, 'Chilli Sauce'),
+    (3, 'Chicken'),
+    (4, 'Cheese'),
+    (5, 'Kebab'),
+    (6, 'Mushrooms'),
+    (7, 'Onions'),
+    (8, 'Egg'),
+    (9, 'Peppers'),
+    (10, 'Schezwan Sauce'),
+    (11, 'Tomatoes'),
+    (12, 'Tomato Sauce');
+```
+
+### Table: `rolls`
+
+| Column Name  | Data Type  | Description                         |
+|--------------|------------|-------------------------------------|
+| `roll_id`    | `integer`  | Unique identifier for the roll     |
+| `roll_name`  | `varchar(30)` | Name of the roll                |
+
+### Insert Data:
+
+```sql
+INSERT INTO rolls(roll_id, roll_name) 
+VALUES 
+    (1, 'Non Veg Roll'),
+    (2, 'Veg Roll');
+```
+
+### Table: `rolls_recipes`
+
+| Column Name  | Data Type  | Description                        |
+|--------------|------------|------------------------------------|
+| `roll_id`    | `integer`  | Unique identifier for the roll    |
+| `ingredients`| `varchar(24)` | Comma-separated list of ingredient IDs for the roll's recipe |
+
+### Insert Data:
+
+```sql
+INSERT INTO rolls_recipes(roll_id, ingredients) 
+VALUES 
+    (1, '1,2,3,4,5,6,8,10'),
+    (2, '4,6,7,9,11,12');
+```
+
+### Table: `driver_order`
+
+| Column Name    | Data Type    | Description                          |
+|----------------|--------------|--------------------------------------|
+| `order_id`     | `integer`    | Unique identifier for the order     |
+| `driver_id`    | `integer`    | Unique identifier for the driver    |
+| `pickup_time`  | `datetime`   | Time when the order was picked up   |
+| `distance`     | `varchar(7)` | Distance covered during the order   |
+| `duration`     | `varchar(10)`| Duration of the order ride          |
+| `cancellation` | `varchar(23)`| Cancellation status of the order    |
+
+### Insert Data:
+
+```sql
+INSERT INTO driver_order(order_id, driver_id, pickup_time, distance, duration, cancellation) 
+VALUES 
+    (1, 1, '01-01-2021 18:15:34', '20km', '32 minutes', ''),
+    (2, 1, '01-01-2021 19:10:54', '20km', '27 minutes', ''),
+    (3, 1, '01-03-2021 00:12:37', '13.4km', '20 mins', 'NaN'),
+    (4, 2, '01-04-2021 13:53:03', '23.4', '40', 'NaN'),
+    (5, 3, '01-08-2021 21:10:57', '10', '15', 'NaN'),
+    (6, 3, null, null, null, 'Cancellation'),
+    (7, 2, '01-08-2021 21:30:45', '25km', '25mins', null),
+    (8, 2, '01-10-2021 00:15:02', '23.4 km', '15 minute', null),
+    (9, 2, null, null, null, 'Customer Cancellation'),
+    (10, 1, '01-11-2021 18:50:20', '10km', '10minutes', null);
+
 select * from customer_orders;
-select * from driver_order;
-select * from ingredients;
-select * from driver;
-select * from rolls;
-select * from rolls_recipes;
 
 -- A. roll metrics
 -- 1. How many rolls were ordered?
