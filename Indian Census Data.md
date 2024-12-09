@@ -1,4 +1,4 @@
-# Indian Census Data
+# Indian Census Data 2011
 
 #### Example CSV File
 You can download or view the CSV file from [this link](https://github.com/PankajVirendraModi/SQL-Projects/blob/main/DISTRICTSTATISTICS.csv).
@@ -14,12 +14,12 @@ SELECT * FROM DISTRICTSTATISTICS; -- 641 -- DISTRICT, STATE, GROWTH, SEX_RATIO, 
 ```
 #### Example CSV File
 You can download or view the CSV file from [this link](https://github.com/PankajVirendraModi/SQL-Projects/blob/main/DISTRICTDEMOGRAPHICS.csv).
-| COLUMN_NAME | DATA_TYPE |
-|-------------|-----------|
-| District    | nvarchar  |
-| State       | nvarchar  |
-| Area_km2    | int       |
-| Population  | int       |
+| 	COLUMN_NAME	 | 	DATA_TYPE	 |
+|------------------------|-----------------------|
+| 	District	| 	nvarchar	  |
+| 	State  	     | 	nvarchar	  |
+| 	Area_km2  	  | 	int 	      |
+|	 Population	  | 	int	      |
 
 ```sql
 SELECT * FROM DISTRICTDEMOGRAPHICS; -- 640 -- DISTRICT, STATE, AREA_KM2, POPULATION
