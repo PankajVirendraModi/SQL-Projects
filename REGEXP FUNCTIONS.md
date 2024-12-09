@@ -1,9 +1,11 @@
-/*
+### Source:
 https://devblogs.microsoft.com/azure-sql/introducing-regular-expression-regex-support-in-azure-sql-db/
-REGEXP_LIKE: This function returns TRUE if a string matches a regular expression pattern, or FALSE otherwise.
-REGEXP_COUNT: This function returns the number of times a regular expression pattern matches in a string.
+
+### Explanation
+* REGEXP_LIKE: This function returns TRUE if a string matches a regular expression pattern, or FALSE otherwise.
+* REGEXP_COUNT: This function returns the number of times a regular expression pattern matches in a string.
 REGEXP_INSTR: This function returns the starting or ending position, based on the specified option, of the given occurrence of a regular expression pattern in a string.
-REGEXP_REPLACE: This function returns a modified string replaced by a ‘replacement string’, where occurrence of the regular expression pattern found.
+REGEXP_REPLACE: This function returns a modified string replaced by a â€˜replacement stringâ€™, where occurrence of the regular expression pattern found.
 REGEXP_SUBSTR: This function returns a substring that matches a regular expression pattern from a string.
 */
 
