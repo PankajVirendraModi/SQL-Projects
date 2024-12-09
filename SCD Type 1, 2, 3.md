@@ -47,6 +47,26 @@ INSERT INTO PRODUCT_STG VALUES
 --INSERT INTO product_stg VALUES (4,'CPU_3',2300);
 --INSERT INTO product_stg VALUES (2,'Keyboard_N',1150);
 ```
+### Product Target Table (`PRODUCT_TARGET`)
+
+This table holds information about products in the target database. It includes product details such as `PRODUCT_ID`, `PRODUCT_NAME`, `PRICE`, and `LAST_UPDATED` date.
+
+### Table Structure
+
+| Column Name   | Data Type     | Description                                    |
+|---------------|---------------|------------------------------------------------|
+| `PRODUCT_ID`  | `INT`         | Unique identifier for each product             |
+| `PRODUCT_NAME`| `VARCHAR(55)` | Name of the product                            |
+| `PRICE`       | `INT`         | Price of the product in currency               |
+| `LAST_UPDATED`| `DATE`        | Date when the product information was last updated |
+
+## Sample Data
+
+| PRODUCT_ID | PRODUCT_NAME | PRICE | LAST_UPDATED  |
+|------------|--------------|-------|---------------|
+| 1          | Mouse        | 1000  | 2024-01-15    |
+| 3          | Monitor      | 6700  | 2024-01-21    |
+
 ```SQL
 CREATE TABLE PRODUCT_TARGET
 (
@@ -92,7 +112,29 @@ END;
 EXEC SCD_ONE;
 ```
 
-##### SCD Type-2
+## SCD Type-2
+
+### Employee Staging Table (`EMP_STG`)
+
+This table holds information about employees in the staging area. It includes details such as `EMP_ID`, `EMP_NAME`, `EMP_LOCATION`, `EMP_SALARY`, and the `UPDATEDON` date.
+
+### Table Structure
+
+| Column Name   | Data Type     | Description                                    |
+|---------------|---------------|------------------------------------------------|
+| `EMP_ID`      | `INT`         | Unique identifier for each employee            |
+| `EMP_NAME`    | `VARCHAR(100)`| Name of the employee                           |
+| `EMP_LOCATION`| `VARCHAR(50)` | Location of the employee                       |
+| `EMP_SALARY`  | `INT`         | Salary of the employee                         |
+| `UPDATEDON`   | `DATE`        | Date when the employee's data was last updated |
+
+### Sample Data
+
+| EMP_ID | EMP_NAME       | EMP_LOCATION | EMP_SALARY | UPDATEDON   |
+|--------|----------------|--------------|------------|-------------|
+| 1001   | Rahul Sharma   | Bangalore    | 45000      | 2023-05-18  |
+| 1003   | Shilpa Gaur    | Pune         | 37000      | 2023-06-01  |
+| 1004   | Shradha Gunjan | Pune         | 33000      | 2023-02-23  |
 
 ```SQL
 CREATE TABLE EMP_STG
@@ -108,6 +150,12 @@ INSERT INTO EMP_STG
 INSERT INTO EMP_STG
     VALUES (1004,'Shradha Gunjan','Pune',33000,TO_DATE('2023-02-23','YYYY-MM-DD'));
 ```
+
+### Sequence Purpose:
+
+- The sequence `EMP_TARGET_SEQ` is primarily used for generating unique `DIM_ID` values in the `EMP_TARGET` table.
+- When a new record is inserted into the `EMP_TARGET` table, the `DIM_ID` column is populated automatically by the sequence to ensure uniqueness.
+
 ```SQL
 -- CREATING A SEQUENCE TO USE IN EMP_TARGET TABLE WITH HELP OF TRIGGER
 CREATE SEQUENCE EMP_TARGET_SEQ
@@ -115,6 +163,38 @@ CREATE SEQUENCE EMP_TARGET_SEQ
   INCREMENT BY 1
   NOCACHE;
 ```
+
+### Employee Target Table (`EMP_TARGET`)
+
+This table holds information about employees in the target database, including historical records for tracking employment details over time. The table contains the employee's basic information, employment period, and active status.
+
+### Table Structure
+
+| Column Name  | Data Type     | Description                                                    |
+|--------------|---------------|----------------------------------------------------------------|
+| `DIM_ID`     | `INT`         | Unique identifier for each dimension record (Primary Key)      |
+| `EMP_ID`     | `INT`         | Unique identifier for the employee                             |
+| `EMP_NAME`   | `VARCHAR(100)`| Name of the employee                                           |
+| `EMP_LOCATION`| `VARCHAR(50)`| Location of the employee                                       |
+| `EMP_SALARY` | `INT`         | Salary of the employee                                         |
+| `STARTDATE`  | `DATE`        | Start date when the employee record becomes valid              |
+| `ENDDATE`    | `DATE`        | End date when the employee record is no longer valid (Optional)|
+| `ACTIVE_FLAG`| `INT`         | Flag to indicate if the record is active (1 = Active, 0 = Inactive) |
+
+**Note**: The `ENDDATE` column defaults to `'9999-12-31'`, which indicates the employee record is currently active.
+
+### Sample Data
+
+| DIM_ID | EMP_ID | EMP_NAME       | EMP_LOCATION | EMP_SALARY | STARTDATE   | ENDDATE     | ACTIVE_FLAG |
+|--------|--------|----------------|--------------|------------|-------------|-------------|-------------|
+| 1      | 1001   | Rahul Sharma   | Bangalore    | 45000      | 2023-05-18  | 9999-12-31  | 1           |
+| 2      | 1003   | Shilpa Gaur    | Pune         | 37000      | 2023-06-01  | 9999-12-31  | 1           |
+| 3      | 1004   | Shradha Gunjan | Pune         | 33000      | 2023-02-23  | 9999-12-31  | 1           |
+
+### Notes:
+- The `STARTDATE` is the date when the employee's record starts being valid.
+- The `ENDDATE` is set to `'9999-12-31'` by default, which is used to indicate that the employee record is currently active. If the employee is no longer active, the `ENDDATE` will be updated with the date the employee left the company.
+- The `ACTIVE_FLAG` indicates whether the employee is currently active (`1` for active, `0` for inactive).
 ```SQL
 CREATE TABLE EMP_TARGET
 (
@@ -127,6 +207,24 @@ STARTDATE DATE NOT NULL,
 ENDDATE DATE, -- DEFAULT TO_DATE('9999-12-31','YYYY-MM-DD')
 ACTIVE_FLAG INT NOT NULL CHECK(ACTIVE_FLAG IN (0,1)));
 ```
+
+### Trigger: `TRG_EMP_TARGET_INSERT`
+
+The `TRG_EMP_TARGET_INSERT` trigger is designed to automatically populate the `DIM_ID` column in the `EMP_TARGET` table when a new record is inserted. It ensures that the `DIM_ID` is generated using the `EMP_TARGET_SEQ` sequence.
+
+### Trigger Purpose:
+
+- The trigger fires **before** each insert operation on the `EMP_TARGET` table.
+- It automatically generates the `DIM_ID` using the `EMP_TARGET_SEQ.NEXTVAL` sequence and assigns it to the `DIM_ID` column.
+- This removes the need to manually specify the `DIM_ID` value when inserting new records into the table.
+
+### Trigger Logic
+
+When a new record is inserted into the `EMP_TARGET` table, the following actions occur:
+1. The trigger fires before the insert operation.
+2. It generates a unique value for the `DIM_ID` column by selecting the next value from the `EMP_TARGET_SEQ` sequence.
+3. The generated value is assigned to the `DIM_ID` column in the new row.
+
 ```SQL
 -- Create a Trigger to Automatically Populate the dim_id
 CREATE OR REPLACE TRIGGER TRG_EMP_TARGET_INSERT
@@ -177,8 +275,29 @@ EXEC SCD_TWO;
 ```
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-##### SCD Type-3
+## SCD Type-3
 
+### SHIPPING_STG Table
+
+This table contains information about products in the shipping staging area, including product details, price, manufacturer address, and the date the record was last updated.
+
+### Table Structure
+
+| Column Name     | Data Type        | Description                                            |
+|-----------------|------------------|--------------------------------------------------------|
+| `PROD_ID`       | `INT`            | Unique identifier for each product (Primary Key)       |
+| `PROD_NAME`     | `VARCHAR(100)`    | Name of the product                                    |
+| `PROD_PRICE`    | `DECIMAL(10,2)`   | Price of the product                                   |
+| `MANUF_ADDRESS` | `VARCHAR(50)`     | Manufacturer’s address of the product                  |
+| `UPDATEDON`     | `DATE`            | Date when the product record was last updated          |
+
+### Sample Data
+
+| PROD_ID | PROD_NAME     | PROD_PRICE | MANUF_ADDRESS | UPDATEDON   |
+|---------|---------------|------------|----------------|-------------|
+| 201     | LED TV        | 17000.25   | Bangalore      | 2023-09-23  |
+| 204     | Refrigerator  | 13999.00   | Kolkata        | 2024-01-21  |
+| 205     | Split AC      | 23000.75   | Mumbai         | 2023-11-29  |
 ```sql
 CREATE TABLE SHIPPING_STG
 (
@@ -197,6 +316,31 @@ INSERT INTO SHIPPING_STG
 -- INSERT INTO SHIPPING_STG VALUES(201,'LCD TV', 17000.25,'Bangalore',TO_DATE('2024-10-23', 'yyyy-mm-dd'));
 -- INSERT INTO SHIPPING_STG VALUES(204,'REFRIGERATOR',17000.25,'PUNE',TO_DATE('2024-09-23', 'yyyy-mm-dd'));
 ```
+
+### SHIPPING_TARGET Table
+
+The `SHIPPING_TARGET` table stores information about products, including their current and previous prices, manufacturer addresses, and the last updated date for each product.
+
+### Table Structure
+
+| Column Name      | Data Type        | Description                                              |
+|------------------|------------------|----------------------------------------------------------|
+| `PROD_ID`        | `INT`            | Unique identifier for each product (Primary Key)         |
+| `PROD_NAME`      | `VARCHAR(100)`    | Name of the product                                      |
+| `MANUF_ADDRESS`  | `VARCHAR(50)`     | Manufacturer’s address of the product                    |
+| `CURRENTPRICE`   | `DECIMAL(10,2)`   | Current price of the product                             |
+| `PREVIOUSPRICE`  | `DECIMAL(10,2)`   | Previous price of the product (nullable)                 |
+| `LASTUPDATED`    | `DATE`            | Date when the product record was last updated            |
+
+### Sample Data
+
+| PROD_ID | PROD_NAME        | MANUF_ADDRESS | CURRENTPRICE | PREVIOUSPRICE | LASTUPDATED  |
+|---------|------------------|----------------|--------------|---------------|--------------|
+| 201     | LED TV           | Bangalore      | 19000.55     | NULL          | 2023-07-12   |
+| 202     | Washing Machine  | Chennai        | 12000.75     | NULL          | 2024-03-19   |
+| 203     | Water Geyser     | Delhi          | 6000.00      | NULL          | 2023-10-22   |
+| 204     | Refrigerator     | Kolkata        | 17000.00     | NULL          | 2024-03-14   |
+
 ```sql
 CREATE TABLE SHIPPING_TARGET
 (
