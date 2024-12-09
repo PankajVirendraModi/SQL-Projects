@@ -1,5 +1,4 @@
 ## ORACLE SQL DEVELOPER
-##### TO DISPLAY THE OUTPUT OF DBMS_OUTPUT.PUT_LINE('CAN BE ANY STRING')
 
 # Slowly Changing Dimensions (SCD) Implementation
 
@@ -10,6 +9,8 @@ This project contains the implementation of Slowly Changing Dimensions (SCD) of 
 - **SCD Type 1**: Overwrite the existing data with new values. No history is preserved.
 - **SCD Type 2**: Create new records to preserve full historical data, with the addition of start and end date columns to indicate the period of validity.
 - **SCD Type 3**: Store limited historical data, typically keeping only the previous value alongside the current value.
+
+##### TO DISPLAY THE OUTPUT OF DBMS_OUTPUT.PUT_LINE('CAN BE ANY STRING')
 ```SQL
 SET SERVEROUTPUT ON;
 ```
