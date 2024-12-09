@@ -39,21 +39,28 @@ INSERT INTO Emp_DETAILS (Name, Email, Phone_Number) VALUES
 
 SELECT * FROM EMP_DETAILS;
 
--- find all the employees whose email addresses end with .com
+#### find all the employees whose email addresses end with .com
+```sql
 SELECT Name, Email FROM EMP_DETAILS WHERE REGEXP_LIKE(Email, '\.com$');
+```
 
--- for each employee, count the number of vowels in their name
+#### for each employee, count the number of vowels in their name
+```sql
 SELECT Name, REGEXP_COUNT(Name, '[AEIOU]',1,'i') AS Vowel_Count FROM EMP_DETAILS;
-
--- for each employee, show their name, email, and the position of the @ sign in their email
+```
+#### for each employee, show their name, email, and the position of the @ sign in their email
+```sql
 SELECT Name, Email, REGEXP_INSTR(email, '@') AS Position_of FROM EMP_DETAILS;
-
--- format the phone numbers in the Employees table to the format (XXX) XXX-XXXX.
+```
+#### format the phone numbers in the Employees table to the format (XXX) XXX-XXXX.
+```sql
 SELECT Phone_Number, REGEXP_REPLACE(Phone_Number, '(\d{3})-(\d{3})-(\d{4})', '(\1) \2-\3',1) AS Phone_Format FROM EMP_DETAILS;
-
--- for each employee, show the domain of their email address
+```
+#### for each employee, show the domain of their email address
+```sql
 SELECT Name, Email, REGEXP_SUBSTR(email, '@(.+)$', 1, 1,'c',1) AS Domain FROM EMP_DETAILS;
-
--- This query retrieves all rows from the EMP_DETAILS table where the EMAIL column contains the substring 'co', 
--- regardless of case (due to the 'i' flag for case-insensitivity).
+```
+#### This query retrieves all rows from the EMP_DETAILS table where the EMAIL column contains the substring 'co', regardless of case (due to the 'i' flag for case-insensitivity).
+```sql
 SELECT * FROM EMP_DETAILS WHERE REGEXP_LIKE(EMAIL,'.co','i');
+```
