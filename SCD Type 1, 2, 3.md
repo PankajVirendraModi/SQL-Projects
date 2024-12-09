@@ -59,11 +59,11 @@ BEGIN
 END;
 ```
 ```SQL
-Execute the procedure
+-- Execute the procedure
 EXEC SCD_ONE;
 ```
-<hr style="border: 1px solid red;">
--- SCD Type-2
+
+-- SCD Type-2  ()
 CREATE TABLE EMP_STG
 (EMP_ID INT PRIMARY KEY,
 EMP_NAME VARCHAR(100) NOT NULL,
