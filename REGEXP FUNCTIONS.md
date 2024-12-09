@@ -8,6 +8,8 @@
 * REGEXP_SUBSTR: This function returns a substring that matches a regular expression pattern from a string.
 
 -- Create Employees table with some records and check constraints for Email and Phone_Number columns
+### Employees Table
+-- Create Employees table with some records and check constraints for Email and Phone_Number columns
 ```sql
 CREATE TABLE Emp_DETAILS (
     Name VARCHAR(150),
