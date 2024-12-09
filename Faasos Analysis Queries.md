@@ -147,7 +147,8 @@ select * from rolls_recipes;
 #### 1. What was the average time in minutes it took for each driver to arrive at the fasoos HQ to pickup the order?
 ```sql
 select driver_id, sum(total_minutes)/count(order_id) avg_time_taken_by_drivers from (
-SELECT do.driver_id, co.order_id, ROW_NUMBER() OVER (PARTITION BY co.order_id ORDER BY DATEDIFF(MINUTE, co.order_date, do.pickup_time)) AS rnk,
+SELECT do.driver_id, co.order_id,
+	ROW_NUMBER() OVER (PARTITION BY co.order_id ORDER BY DATEDIFF(MINUTE, co.order_date, do.pickup_time)) AS rnk,
 	DATEDIFF(MINUTE, co.order_date, do.pickup_time) AS total_minutes 
 FROM customer_orders co 
 INNER JOIN driver_order do ON co.order_id = do.order_id 
