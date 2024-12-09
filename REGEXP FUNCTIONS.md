@@ -37,8 +37,6 @@ INSERT INTO Emp_DETAILS (Name, Email, Phone_Number) VALUES
     ('Charlie Brown', 'charlie@contoso.co.in', '567-890-1234');
 ```
 
-SELECT * FROM EMP_DETAILS;
-
 #### Find all the employees whose email addresses end with .com
 ```sql
 SELECT Name, Email
