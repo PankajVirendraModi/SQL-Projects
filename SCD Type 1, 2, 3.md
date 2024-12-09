@@ -60,7 +60,7 @@ END;
 ```
 
 ```SQL
--- Execute the procedure
+-- Execute the procedure SCD_ONE
 EXEC SCD_ONE;
 ```
 
@@ -144,11 +144,14 @@ END;
 ```
 
 ```SQL
+-- Execute the procedure SCD_TWO
 EXEC SCD_TWO;
 ```
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ##### SCD Type-3
+
+```sql
 CREATE TABLE SHIPPING_STG
 (
 PROD_ID INT PRIMARY KEY,
@@ -165,7 +168,8 @@ INSERT INTO SHIPPING_STG
     VALUES(205,'Split AC',23000.75,'Mumbai',TO_DATE('2023-11-29', 'yyyy-mm-dd'));
 -- INSERT INTO SHIPPING_STG VALUES(201,'LCD TV', 17000.25,'Bangalore',TO_DATE('2024-10-23', 'yyyy-mm-dd'));
 -- INSERT INTO SHIPPING_STG VALUES(204,'REFRIGERATOR',17000.25,'PUNE',TO_DATE('2024-09-23', 'yyyy-mm-dd'));
-
+```
+```sql
 CREATE TABLE SHIPPING_TARGET
 (
 PROD_ID INT PRIMARY KEY,
@@ -183,12 +187,14 @@ INSERT INTO SHIPPING_TARGET
     VALUES(203,'Water Geyser','Delhi',6000.00,NULL,TO_DATE('2023-10-22', 'yyyy-mm-dd'));
 INSERT INTO SHIPPING_TARGET
     VALUES(204,'Refrigerator','Kolkata',17000.00,NULL,TO_DATE('2024-03-14', 'yyyy-mm-dd'));
-
--- SELECT * FROM SHIPPING_STG;
--- SELECT * FROM SHIPPING_TARGET;
--- TRUNCATE TABLE SHIPPING_STG;
--- TRUNCATE TABLE SHIPPING_TARGET;
-
+```
+```sql
+SELECT * FROM SHIPPING_STG;
+SELECT * FROM SHIPPING_TARGET;
+TRUNCATE TABLE SHIPPING_STG;
+TRUNCATE TABLE SHIPPING_TARGET;
+```
+```sql
 CREATE OR REPLACE PROCEDURE SCD_THREE
 AS
 BEGIN
@@ -208,5 +214,8 @@ VALUES(SOURCE.PROD_ID, SOURCE.PROD_NAME, SOURCE.MANUF_ADDRESS, SOURCE.PROD_PRICE
 DELETE FROM SHIPPING_STG;
 DBMS_OUTPUT.PUT_LINE('SUCCESSFULLY IMPLEMENTED SCD TYPE 3');
 END;
-
+```
+```sql
+-- Execute the procedure SCD_THREE
 EXEC SCD_THREE;
+```
