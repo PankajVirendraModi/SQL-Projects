@@ -4,18 +4,19 @@ https://devblogs.microsoft.com/azure-sql/introducing-regular-expression-regex-su
 ### Explanation
 * REGEXP_LIKE: This function returns TRUE if a string matches a regular expression pattern, or FALSE otherwise.
 * REGEXP_COUNT: This function returns the number of times a regular expression pattern matches in a string.
-REGEXP_INSTR: This function returns the starting or ending position, based on the specified option, of the given occurrence of a regular expression pattern in a string.
-REGEXP_REPLACE: This function returns a modified string replaced by a ‘replacement string’, where occurrence of the regular expression pattern found.
-REGEXP_SUBSTR: This function returns a substring that matches a regular expression pattern from a string.
-*/
+* REGEXP_INSTR: This function returns the starting or ending position, based on the specified option, of the given occurrence of a regular expression pattern in a string.
+* REGEXP_REPLACE: This function returns a modified string replaced by a ‘replacement string’, where occurrence of the regular expression pattern found.
+* REGEXP_SUBSTR: This function returns a substring that matches a regular expression pattern from a string.
 
 -- Create Employees table with some records and check constraints for Email and Phone_Number columns
-
+```sql
 CREATE TABLE Emp_DETAILS (
     Name VARCHAR(150),
     Email VARCHAR(320),
     Phone_Number VARCHAR(20)
 );
+```
+```sql
 -- Insert some sample data
 INSERT INTO Emp_DETAILS (Name, Email, Phone_Number) VALUES
     ('John Doe', 'john@contoso.com', '123-456-7890');
@@ -27,7 +28,7 @@ INSERT INTO Emp_DETAILS (Name, Email, Phone_Number) VALUES
     ('Eve Jones', 'eve@contoso.com', '456-789-0123');
 INSERT INTO Emp_DETAILS (Name, Email, Phone_Number) VALUES
     ('Charlie Brown', 'charlie@contoso.co.in', '567-890-1234');
-
+```
 
 SELECT * FROM EMP_DETAILS;
 
