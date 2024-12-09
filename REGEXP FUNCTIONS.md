@@ -7,9 +7,15 @@
 * REGEXP_REPLACE: This function returns a modified string replaced by a ‘replacement string’, where occurrence of the regular expression pattern found.
 * REGEXP_SUBSTR: This function returns a substring that matches a regular expression pattern from a string.
 
--- Create Employees table with some records and check constraints for Email and Phone_Number columns
+
 ### Employees Table
--- Create Employees table with some records and check constraints for Email and Phone_Number columns
+#### Create Employees table with some records.
+| Column Name    | Data Type    |
+|----------------|--------------|
+| Name           | VARCHAR(150) |
+| Email          | VARCHAR(320) |
+| Phone_Number   | VARCHAR(20)  |
+
 ```sql
 CREATE TABLE Emp_DETAILS (
     Name VARCHAR(150),
