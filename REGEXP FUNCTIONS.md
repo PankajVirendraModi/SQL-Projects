@@ -1,5 +1,4 @@
-### Source:
-https://devblogs.microsoft.com/azure-sql/introducing-regular-expression-regex-support-in-azure-sql-db/
+### Source: https://devblogs.microsoft.com/azure-sql/introducing-regular-expression-regex-support-in-azure-sql-db/
 
 ### Explanation
 * REGEXP_LIKE: This function returns TRUE if a string matches a regular expression pattern, or FALSE otherwise.
