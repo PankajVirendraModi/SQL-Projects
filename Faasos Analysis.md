@@ -1,3 +1,4 @@
+```sql
 select * from customer_orders;
 select * from driver_order;
 select * from ingredients;
@@ -193,3 +194,4 @@ select driver_id, concat((successful_delivery*100)/total_orders_takes , '%') suc
 select driver_id, sum(cancellation_percentage) successful_delivery, count(driver_id) total_orders_takes from(
 select driver_id, case when cancellation like '%cancel%' then 0 else 1 end as cancellation_percentage from driver_order) a
 group by driver_id) b;
+```
