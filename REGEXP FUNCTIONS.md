@@ -8,8 +8,8 @@
 * **REGEXP_SUBSTR**: This function returns a substring that matches a regular expression pattern from a string.
 
 
-### Employees Table
-#### Create Employees table with some records.
+### `Employees` Table
+
 | Column Name    | Data Type    |
 |----------------|--------------|
 | Name           | VARCHAR(150) |
