@@ -115,7 +115,8 @@ select order_id, driver_id, pickup_time, distance, duration,
 	else 1 end as cancellation from driver_order
 )
 select either_both_or_not, count(either_both_or_not) count_both_excluded_included from (
-select *, case when not_include_items<>'0' and extra_items_included<>'0' then 'both_included_excluded' else 'either_included_or_excluded' end either_both_or_not
+select *, case when not_include_items<>'0' and extra_items_included<>'0'
+		then 'both_included_excluded' else 'either_included_or_excluded' end either_both_or_not
 from temp_customer_orders where order_id in (
 select order_id from temp_drive_order where cancellation<>0)) a
 group by either_both_or_not;
@@ -156,7 +157,8 @@ group by driver_id;
 #### 2. Is there any relationship between the number of rolls and how long the order takes to prepare?
 ```sql
 select order_id, count(roll_id) count_of_rolls, sum(total_minutes)/count(roll_id) total_time_taken from (
-SELECT co.roll_id, co.customer_id, do.driver_id, co.order_id, ROW_NUMBER() OVER (PARTITION BY co.order_id ORDER BY DATEDIFF(MINUTE, co.order_date, do.pickup_time)) AS rnk,
+SELECT co.roll_id, co.customer_id, do.driver_id, co.order_id,
+	ROW_NUMBER() OVER (PARTITION BY co.order_id ORDER BY DATEDIFF(MINUTE, co.order_date, do.pickup_time)) AS rnk,
 	DATEDIFF(MINUTE, co.order_date, do.pickup_time) AS total_minutes 
 FROM customer_orders co 
 INNER JOIN driver_order do ON co.order_id = do.order_id 
