@@ -1,13 +1,12 @@
-
--- A. roll metrics
--- 1. How many rolls were ordered?
+### A. roll metrics
+#### 1. How many rolls were ordered?
 ```sql
 select count(roll_id) total_rolls_ordered from customer_orders;
-
+```
 -- 2. How many unique customer orders were made?
 ```sql
 select count(distinct customer_id) unique_customers from customer_orders;
-
+```
 -- 3. How many successful orders were delivered by each driver?
 select driver_id, count(distinct order_id) successful_orders
 from driver_order
