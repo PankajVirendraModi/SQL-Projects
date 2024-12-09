@@ -4,7 +4,8 @@
 ```SQL
 SET SERVEROUTPUT ON;
 ```
--- SCD Type-1
+##### SCD Type-1
+```SQL
 CREATE TABLE PRODUCT_STG
 (
 PRODUCT_ID INT PRIMARY KEY,
@@ -17,7 +18,8 @@ INSERT INTO PRODUCT_STG VALUES
 (2,'Keyboard',1300);
 --INSERT INTO product_stg VALUES (4,'CPU_3',2300);
 --INSERT INTO product_stg VALUES (2,'Keyboard_N',1150);
-
+```
+```SQL
 CREATE TABLE PRODUCT_TARGET
 (
 PRODUCT_ID INT NOT NULL,
@@ -29,12 +31,14 @@ INSERT INTO PRODUCT_TARGET VALUES
 (1,'Mouse',1000,TO_DATE('2024-01-15', 'yyyy-mm-dd'));
 INSERT INTO PRODUCT_TARGET VALUES
 (3,'Monitor',6700,TO_DATE('2024-01-21', 'yyyy-mm-dd'));
-
--- SELECT * FROM PRODUCT_STG;
--- SELECT * FROM PRODUCT_TARGET;
--- TRUNCATE TABLE PRODUCT_STG;
--- TRUNCATE TABLE PRODUCT_TARGET;
-
+```
+```SQL
+SELECT * FROM PRODUCT_STG;
+SELECT * FROM PRODUCT_TARGET;
+TRUNCATE TABLE PRODUCT_STG;
+TRUNCATE TABLE PRODUCT_TARGET;
+```
+```SQL
 CREATE OR REPLACE PROCEDURE SCD_ONE
 IS
   TODAYS_DATE DATE := SYSDATE;
@@ -53,7 +57,7 @@ BEGIN
   DELETE FROM PRODUCT_STG; -- Be cautious with TRUNCATE, it's irreversible
   DBMS_OUTPUT.PUT_LINE('Successfully implemented SCD 1');
 END;
-
+```
 -- Execute the procedure
 EXEC SCD_ONE;
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
