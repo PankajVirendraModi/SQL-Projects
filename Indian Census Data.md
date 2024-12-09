@@ -163,9 +163,10 @@ FROM (
 	INNER JOIN DISTRICTDEMOGRAPHICS DD ON DS.DISTRICT=DD.DISTRICT ) A
 WHERE FEMALE_POPULATION>MALE_POPULATION AND STATE='MAHARASHTRA' ORDER BY POPULATION_DIFFERENCE;
 ```
-#### total literate person/population = literacy_ration
-#### total literate person = literacy_ratio*population
-#### total illiterate person = (1-literacy_ratio)*population
+> [!IMPORTANT]
+> total literate person/population = literacy_ration
+> => total literate person = literacy_ratio*population
+> => total illiterate person = (1-literacy_ratio)*population
 ```sql
 SELECT STATE, SUM(TOTAL_LITERATE_PEOPLE) TOTAL_LITERATE_PEOPLE, SUM(TOTAL_ILLLITERATE_PEOPLE) TOTAL_ILLLITERATE_PEOPLE FROM (
 	SELECT DISTRICT, STATE, ROUND(LITERACY_RATIO*POPULATION, 0) AS TOTAL_LITERATE_PEOPLE,
