@@ -1,8 +1,15 @@
 USE PRACT;
 
+#### Example CSV File
+You can download or view the CSV file from [this link](https://github.com/PankajVirendraModi/SQL-Projects/blob/main/DISTRICTSTATISTICS.csv).
+```sql
 SELECT * FROM DISTRICTSTATISTICS; -- 641 -- DISTRICT, STATE, GROWTH, SEX_RATIO, LITERACY
+```
+#### Example CSV File
+You can download or view the CSV file from [this link](https://github.com/PankajVirendraModi/SQL-Projects/blob/main/DISTRICTDEMOGRAPHICS.csv).
+```sql
 SELECT * FROM DISTRICTDEMOGRAPHICS; -- 640 -- DISTRICT, STATE, AREA_KM2, POPULATION
--- SELECT DISTINCT STATE FROM DISTRICTSTATISTICS;
+```
 
 -- DATASET FOR JHARKHAND AND BIHAR
 SELECT * FROM DISTRICTSTATISTICS WHERE STATE IN ('JHARKHAND','BIHAR');
