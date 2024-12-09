@@ -13,6 +13,26 @@ This project contains the implementation of Slowly Changing Dimensions (SCD) of 
 SET SERVEROUTPUT ON;
 ```
 ##### SCD Type-1
+
+# Product Stage Table (`PRODUCT_STG`)
+
+This table holds information about products in the staging area. It includes product details such as `PRODUCT_ID`, `PRODUCT_NAME`, and `PRICE`.
+
+## Table Structure
+
+| Column Name   | Data Type | Description                          |
+|---------------|-----------|--------------------------------------|
+| `PRODUCT_ID`  | `INT`     | Unique identifier for each product   |
+| `PRODUCT_NAME`| `VARCHAR` | Name of the product                  |
+| `PRICE`       | `INT`     | Price of the product in currency     |
+
+## Sample Data
+
+| PRODUCT_ID | PRODUCT_NAME | PRICE |
+|------------|--------------|-------|
+| 1          | Mouse        | 800   |
+| 2          | Keyboard     | 1300  |
+
 ```SQL
 CREATE TABLE PRODUCT_STG
 (
